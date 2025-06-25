@@ -22,6 +22,11 @@ export const updateUser = async (data) => {
     });
     return response.data;
   } catch (error) {
+    if (error.response.status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      window.location.href = "/";
+    }
     console.error("Error updating user:", error?.response?.data);
     throw error?.response?.data;
   }
@@ -50,6 +55,11 @@ export const changePassword = async (data) => {
     );
     return response.data;
   } catch (error) {
+    if (error.response.status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      window.location.href = "/";
+    }
     console.error("Error changing password:", error?.response?.data);
     throw error?.response?.data;
   }

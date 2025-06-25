@@ -123,3 +123,8 @@
     font-style: normal;
   }
 }
+
+.leaflet-container {
+  height: 300px;
+  border-radius: 0.5rem;
+}

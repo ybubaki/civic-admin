@@ -29,6 +29,7 @@ function Login() {
     onSuccess: (data) => {
       if (data.data.user.role === "admin") {
         localStorage.setItem("token", data.data.access_token);
+        localStorage.setItem("user", JSON.stringify(data.data.user));
         navigate("/dashboard");
       } else {
         navigate("/");
