@@ -21,3 +21,26 @@ export const getUsers = async (token) => {
     throw error?.response?.data || "Internal Server Error";
   }
 };
+
+export const updateUser = async (data) => {
+  try {
+    const response = await axios.put(
+      `${BASE_URL}/update/${data.id}`,
+      data.formData,
+      {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    if (error.response.status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      window.location.href = "/";
+    }
+    console.error("Error updating user:", error?.response?.data);
+    throw error?.response?.data;
+  }
+};

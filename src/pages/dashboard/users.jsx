@@ -14,10 +14,10 @@ export default function Users() {
   const handleSearch = () => {
     setSearch(input);
   };
-  console.log(data);
+
   return (
     <div>
-      <div className="flex gap-2">
+      {/* <div className="flex gap-2">
         <Input
           type="text"
           placeholder="Search"
@@ -35,7 +35,7 @@ export default function Users() {
         >
           Search
         </Button>
-      </div>
+      </div> */}
       <div className="mt-8">
         <UserList data={data.data} />
       </div>

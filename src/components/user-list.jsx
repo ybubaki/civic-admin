@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
+import UserDetailSheet from "./user-detail";
 
 const UserList = ({ data }) => {
   return (
@@ -23,12 +24,7 @@ const UserList = ({ data }) => {
         </TableHeader>
         <TableBody>
           {data.map((user) => (
-            <TableRow key={user.id}>
-              <TableCell className="font-medium">{user.name}</TableCell>
-              <TableCell>{user.username}</TableCell>
-              <TableCell>{user.role}</TableCell>
-              <TableCell className="text-right">{user.email}</TableCell>
-            </TableRow>
+            <UserDetailSheet key={user.id} user={user} />
           ))}
         </TableBody>
       </Table>
