@@ -18,7 +18,7 @@ export default function Settings() {
         </CardHeader>
         <CardContent>
           <div className="flex flex-col justify-center gap-4 items-center">
-            <div className="h-16 flex items-center justify-center w-16 rounded-full bg-gray-200 p-2">
+            <div className="h-16 flex items-center justify-center w-16 rounded-full bg-gray-200 dark:bg-gray-800 p-2">
               <p className="text-lg font-bold">
                 {user.name.split(" ")[0][0].toUpperCase() +
                   user.name.split(" ")[1][0].toUpperCase()}

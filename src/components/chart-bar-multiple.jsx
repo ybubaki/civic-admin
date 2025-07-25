@@ -44,7 +44,7 @@ const ChartBarMultiple = ({ data }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Categories Chart</CardTitle>
+        <CardTitle>Complains by Issue Type and Category</CardTitle>
         <CardDescription>Number of issues</CardDescription>
       </CardHeader>
       <CardContent>

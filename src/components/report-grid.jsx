@@ -6,7 +6,7 @@ const ReportGrid = ({ data }) => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {data.map((issue) => (
         <ReportDetailSheet key={issue.id} report={issue}>
-          <div className="bg-white rounded-lg shadow cursor-pointer">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow cursor-pointer">
             <img
               src={BASE_URL + issue.imageUrl}
               alt={issue.title}
@@ -21,22 +21,30 @@ const ReportGrid = ({ data }) => {
                 }).format(new Date(issue.createdAt))}
               </p>
               <div>
-                <h2 className="text-lg font-semibold line-clamp-1">
+                <h2 className="text-lg font-semibold line-clamp-1 dark:text-white">
                   {issue.title}
                 </h2>
-                <p className="text-sm text-gray-600 line-clamp-3">
+                <p className="text-sm text-gray-600 line-clamp-3 dark:text-gray-300">
                   {issue.description}
                 </p>
               </div>
               <div className="flex flex-row-reverse items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="h-3 w-3 rounded-full bg-red-500"></div>
-                  <p className="text-gray-500 text-sm font-medium">
+                  <div
+                    className={`h-3 w-3 rounded-full ${
+                      issue.priority == "high"
+                        ? "bg-red-500"
+                        : issue.priority == "medium"
+                        ? "bg-yellow-500"
+                        : "bg-green-500"
+                    }`}
+                  ></div>
+                  <p className="text-gray-500 text-sm font-medium dark:text-white">
                     {issue.priority.toUpperCase()}
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <p className="text-gray-500 bg-gray-200 rounded-full px-4 py-1 text-xs font-medium">
+                  <p className="text-gray-500 bg-gray-200 rounded-full px-4 py-1 text-xs font-medium dark:bg-gray-700 dark:text-white">
                     {issue.category}
                   </p>
                 </div>
