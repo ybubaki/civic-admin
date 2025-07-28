@@ -19,7 +19,6 @@ const ReportDetailSheet = ({ report, children }) => {
   const { mutate, isPending } = useMutation({
     mutationFn: updateIssue,
     onSuccess: (data) => {
-      console.log(data);
       queryClient.invalidateQueries();
     },
   });
@@ -30,6 +29,17 @@ const ReportDetailSheet = ({ report, children }) => {
       id: report.id,
       formData: {
         status: report.status === "closed" ? "open" : "closed",
+      },
+      token,
+    });
+  };
+
+  const handleUpdateProgressStatus = () => {
+    const token = localStorage.getItem("token");
+    mutate({
+      id: report.id,
+      formData: {
+        status: "in_progress",
       },
       token,
     });
@@ -80,18 +90,30 @@ const ReportDetailSheet = ({ report, children }) => {
                 <Label>Status</Label>
                 <p className="text-sm text-gray-500">{report.status}</p>
               </div>
-              <Button
-                variant="outline"
-                size="sm"
-                disabled={isPending}
-                onClick={handleUpdateStatus}
-              >
-                {isPending
-                  ? "Closing..."
-                  : report.status === "closed"
-                  ? "Open"
-                  : "Close"}
-              </Button>
+              <div className="flex flex-row gap-2">
+                {report.status !== "in_progress" && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={isPending}
+                    onClick={handleUpdateProgressStatus}
+                  >
+                    {isPending ? "loading..." : "in progress"}
+                  </Button>
+                )}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  disabled={isPending}
+                  onClick={handleUpdateStatus}
+                >
+                  {isPending
+                    ? "Closing..."
+                    : report.status === "closed"
+                    ? "Open"
+                    : "Close"}
+                </Button>
+              </div>
             </div>
           </div>
           {report.latitude && report.longitude && (

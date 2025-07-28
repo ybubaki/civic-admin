@@ -2,6 +2,7 @@ import ChartBarMultiple from "@/components/chart-bar-multiple";
 import { ChartBarHorizontal } from "@/components/chart-bar-vertical";
 import { useSearchIssues } from "@/hooks/use-issues";
 import StatsMapView from "@/components/stats-map-view";
+import { ChartPieDonutText } from "@/components/pie-chart";
 
 function Home() {
   const { data, isPending, error } = useSearchIssues("");
@@ -20,6 +21,11 @@ function Home() {
           {data && <StatsMapView data={data.data} />}
         </div>
       </div>
+      {data && (
+        <div className="w-[90%] mx-auto mt-8">
+          <ChartPieDonutText data={data.data} />
+        </div>
+      )}
     </div>
   );
 }
