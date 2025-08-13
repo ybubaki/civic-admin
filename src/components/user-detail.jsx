@@ -16,13 +16,14 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateUser } from "@/service/user.service";
 import { BASE_URL } from "@/service";
+import { StarIcon } from "lucide-react";
 
 const UserDetailSheet = ({ user }) => {
   const [email, setEmail] = useState(user.email);
   const [name, setName] = useState(user.name);
   const [username, setUsername] = useState(user.username);
-
-  console.log(user);
+  const [phone, setPhone] = useState(user.phone);
+  const [rating, setRating] = useState(user.rating);
 
   const queryClient = useQueryClient();
 
@@ -88,6 +89,28 @@ const UserDetailSheet = ({ user }) => {
             />
           </div>
           <div className="grid gap-3">
+            <Label htmlFor="sheet-demo-phone">Phone</Label>
+            <Input
+              id="sheet-demo-phone"
+              defaultValue={user.phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+          <div>
+            <div className="grid gap-3">
+              <Label htmlFor="sheet-demo-rating">Rating</Label>
+              <div className="flex items-center gap-2">
+                {[1, 2, 3, 4, 5].map((starNumber) => (
+                  <StarIcon
+                    key={starNumber}
+                    className={rating >= starNumber ? "text-yellow-400" : ""}
+                    onClick={() => setRating(starNumber)}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="grid gap-3">
             <Label htmlFor="sheet-demo-role">Role</Label>
             <Input id="sheet-demo-role" defaultValue={user.role} disabled />
           </div>
@@ -124,6 +147,8 @@ const UserDetailSheet = ({ user }) => {
                 name,
                 username,
                 email,
+                phone,
+                rating,
               })
             }
           >

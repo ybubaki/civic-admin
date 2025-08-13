@@ -46,7 +46,6 @@ export function ChartPieDonutText({ data }) {
   ];
 
   data.forEach((item) => {
-    console.log(item);
     if (item.status == "open") {
       chartData[0].value += 1;
     } else if (item.status == "in_progress") {

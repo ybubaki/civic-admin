@@ -36,16 +36,23 @@ const chartConfig = {
 
 export function ChartBarHorizontal({ data }) {
   const chartData = [
-    { category: "Flood", open: 0, closed: 0, inProgress: 0 },
-    { category: "Broken Streetlights", open: 0, closed: 0, inProgress: 0 },
-    { category: "Damaged Road", open: 0, closed: 0, inProgress: 0 },
+    { category: "Flood", open: 0, closed: 0, inProgress: 0, range: 0 },
+    {
+      category: "Broken Streetlights",
+      open: 0,
+      closed: 0,
+      inProgress: 0,
+      range: 0,
+    },
+    { category: "Damaged Road", open: 0, closed: 0, inProgress: 0, range: 0 },
     {
       category: "Overflowing Community Dump",
       open: 0,
       closed: 0,
       inProgress: 0,
+      range: 0,
     },
-    { category: "Homeless", open: 0, closed: 0, inProgress: 0 },
+    { category: "Homeless", open: 0, closed: 0, inProgress: 0, range: 0 },
   ];
 
   data.forEach((item) => {
@@ -54,10 +61,13 @@ export function ChartBarHorizontal({ data }) {
     );
     if (category && item.status === "open") {
       category.open += 1;
+      category.range += 1;
     } else if (category && item.status === "closed") {
       category.closed += 1;
+      category.range += 1;
     } else if (category && item.status === "in_progress") {
       category.inProgress += 1;
+      category.range += 1;
     }
   });
   return (
@@ -69,7 +79,7 @@ export function ChartBarHorizontal({ data }) {
       <CardContent>
         <ChartContainer config={chartConfig}>
           <BarChart accessibilityLayer data={chartData} layout="vertical">
-            <XAxis type="number" dataKey="open" hide />
+            <XAxis type="number" dataKey="range" hide />
             <YAxis
               dataKey="category"
               type="category"
