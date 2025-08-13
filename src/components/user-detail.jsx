@@ -24,6 +24,7 @@ const UserDetailSheet = ({ user }) => {
   const [username, setUsername] = useState(user.username);
   const [phone, setPhone] = useState(user.phone);
   const [rating, setRating] = useState(user.rating);
+  const [active, setActive] = useState(user.active);
 
   const queryClient = useQueryClient();
 
@@ -127,6 +128,17 @@ const UserDetailSheet = ({ user }) => {
             </div>
           )}
           <div className="grid gap-3">
+            <Label htmlFor="sheet-demo-active">Block user</Label>
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={isPending}
+              onClick={() => setActive(active === "true" ? "false" : "true")}
+            >
+              {active === "true" ? "Unblock user" : "Block user"}
+            </Button>
+          </div>
+          <div className="grid gap-3">
             <h2 className="text-lg font-semibold">Reports</h2>
             {user.reports.length > 0 ? (
               <div className="flex flex-col gap-2">
@@ -149,6 +161,7 @@ const UserDetailSheet = ({ user }) => {
                 email,
                 phone,
                 rating,
+                active,
               })
             }
           >
