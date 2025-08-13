@@ -13,6 +13,7 @@ import MapView from "./map-view";
 import { useMutation } from "@tanstack/react-query";
 import { updateIssue } from "@/service/issue.service";
 import { useQueryClient } from "@tanstack/react-query";
+import { StarIcon } from "lucide-react";
 
 const ReportDetailSheet = ({ report, children }) => {
   const queryClient = useQueryClient();
@@ -22,6 +23,8 @@ const ReportDetailSheet = ({ report, children }) => {
       queryClient.invalidateQueries();
     },
   });
+
+  console.log(report);
 
   const handleUpdateStatus = () => {
     const token = localStorage.getItem("token");
@@ -113,6 +116,31 @@ const ReportDetailSheet = ({ report, children }) => {
                     ? "Open"
                     : "Close"}
                 </Button>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1">
+              <Label>Created by</Label>
+              <p className="text-sm text-gray-500">{report.author.name}</p>
+            </div>
+            <div className="flex flex-col gap-1">
+              <Label>Phone Number</Label>
+              <p className="text-sm text-gray-500">{report.author.phone}</p>
+            </div>
+            <div className="flex flex-col gap-1">
+              <Label>User Rating</Label>
+              <div className="flex items-center gap-2">
+                {[1, 2, 3, 4, 5].map((starNumber) => (
+                  <StarIcon
+                    key={starNumber}
+                    className={
+                      report.author.rating >= starNumber
+                        ? "text-yellow-400"
+                        : ""
+                    }
+                  />
+                ))}
               </div>
             </div>
           </div>
