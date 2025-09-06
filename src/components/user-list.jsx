@@ -18,6 +18,7 @@ const UserList = ({ data }) => {
           <TableRow>
             <TableHead className="w-[100px]">Name</TableHead>
             <TableHead>Username</TableHead>
+            <TableHead>Account Status</TableHead>
             <TableHead>Role</TableHead>
             <TableHead className="text-right">Email</TableHead>
           </TableRow>

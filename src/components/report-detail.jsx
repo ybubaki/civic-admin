@@ -91,7 +91,13 @@ const ReportDetailSheet = ({ report, children }) => {
             <div className="flex flex-row justify-between items-center">
               <div className="flex flex-col gap-1">
                 <Label>Status</Label>
-                <p className="text-sm text-gray-500">{report.status}</p>
+                <p className="text-sm text-gray-500">
+                  {report.status === "closed"
+                    ? "Resolved"
+                    : report.status === "in_progress"
+                    ? "In Progress"
+                    : "Open"}
+                </p>
               </div>
               <div className="flex flex-row gap-2">
                 {report.status !== "in_progress" && (
@@ -101,7 +107,7 @@ const ReportDetailSheet = ({ report, children }) => {
                     disabled={isPending}
                     onClick={handleUpdateProgressStatus}
                   >
-                    {isPending ? "loading..." : "in progress"}
+                    {isPending ? "loading..." : "In Progress"}
                   </Button>
                 )}
                 <Button
@@ -111,10 +117,10 @@ const ReportDetailSheet = ({ report, children }) => {
                   onClick={handleUpdateStatus}
                 >
                   {isPending
-                    ? "Closing..."
+                    ? "loading..."
                     : report.status === "closed"
                     ? "Open"
-                    : "Close"}
+                    : "Resolve"}
                 </Button>
               </div>
             </div>
